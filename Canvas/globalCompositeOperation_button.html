@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Another canvas globalCompositeOperation example</title>
+    <script type="text/javascript" src="jquery-1.6.js"></script>
+    <script type="text/javascript">
+    var compositeTypes = [
+        'source-over','source-in','source-out','source-atop',
+        'destination-over','destination-in','destination-out','destination-atop',
+        'lighter','darker','copy','xor'
+      ];
+	function draw(ctype){
+		$("#image_label").html(ctype);
+		
+          clearCanvas();
+		var c=document.getElementById("image_changing");
+		var ctx=c.getContext("2d");
+		// draw rectangle
+          ctx.fillStyle = "#09f";
+          ctx.fillRect(15,15,70,70);
+
+          // set composite property
+          ctx.globalCompositeOperation = ctype;
+          
+          // draw circle
+          ctx.fillStyle = "#f30";
+          ctx.beginPath();
+          ctx.arc(75,75,35,0,Math.PI*2,true);
+          ctx.fill();
+		}
+	function clearCanvas(){
+		var c=document.getElementById("image_changing");
+		c.height=c.height;
+	}
+    </script>
+    <style type="text/css">
+      body { margin: 20px; font-family: arial,verdana,helvetica; background: #fff;}
+      h1 { font-size: 140%; font-weight:normal; color: #036; border-bottom: 1px solid #ccc; }
+      canvas { border: 2px solid #000; margin-bottom: 5px; }
+    </style>
+  </head>
+  <body>
+    <h1>A canvas <code>globalCompositeOperation</code> example</h1>
+    <div id="image">
+		<canvas id="image_changing" width="125" height="125"></canvas>
+		<br/>
+		<label id="image_label"></label>
+    </div>
+    <div id="buttons">
+    <button id="source-over" onClick="draw('source-over')">source-over</button>
+    <button id="source-in" onClick="draw('source-in')">source-in</button>
+    <button id="source-out" onClick="draw('source-out')">source-out</button>
+    <button id="source-atop" onClick="draw('source-atop')">source-atop</button>
+    <button id="destination-over" onClick="draw('destination-over')">destination-over</button>
+    <button id="destination-in" onClick="draw('destination-in')">destination-in</button>
+    <button id="destination-out" onClick="draw('destination-out')">destination-out</button>
+    <button id="destination-atop" onClick="draw('destination-atop')">destination-atop</button>
+    <button id="lighter" onClick="draw('lighter')">lighter</button>
+    <button id="darker" onClick="draw('darker')">darker</button>
+    <button id="copy" onClick="draw('copy')">copy</button>
+    <button id="xor" onClick="draw('xor')">xor</button>
+    </div>
+  </body>
+</html>
